@@ -4,7 +4,8 @@ ruby '2.0.0'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.0.1'
-
+gem 'devise', '3.2.2'
+gem 'foundation-rails'
 # Use postgresql as the database for Active Record
 gem 'pg'
 
@@ -35,6 +36,9 @@ group :doc do
 end
 
 gem 'rails_12factor'
+group :development do
+  gem 'meta_request'
+end
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.1.2'
 
