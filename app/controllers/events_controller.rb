@@ -15,8 +15,6 @@ class EventsController < ApplicationController
   # GET /events/new
   def new
     @event = Event.new
-    @event.users << current_user
-    raise Exception
   end
 
   # GET /events/1/edit
