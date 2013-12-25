@@ -1,5 +1,7 @@
 Wow::Application.routes.draw do
 
+  resources :transactions
+
   resources :people
 
   resources :event_accesses
