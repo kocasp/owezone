@@ -1,10 +1,10 @@
 class EventsController < ApplicationController
   before_action :set_event, only: [:show, :edit, :update, :destroy]
-
+  before_filter :authenticate_user!
   # GET /events
   # GET /events.json
   def index
-    @events = Event.all
+    @events = current_user.events.all
   end
 
   # GET /events/1
@@ -15,6 +15,8 @@ class EventsController < ApplicationController
   # GET /events/new
   def new
     @event = Event.new
+    @event.users << current_user
+    raise Exception
   end
 
   # GET /events/1/edit
