@@ -1,0 +1,31 @@
+<h1>Listing event_accesses</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Type</th>
+      <th>User</th>
+      <th>Event</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @event_accesses.each do |event_access| %>
+      <tr>
+        <td><%= event_access.type %></td>
+        <td><%= event_access.user_id %></td>
+        <td><%= event_access.event_id %></td>
+        <td><%= link_to 'Show', event_access %></td>
+        <td><%= link_to 'Edit', edit_event_access_path(event_access) %></td>
+        <td><%= link_to 'Destroy', event_access, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Event access', new_event_access_path %>

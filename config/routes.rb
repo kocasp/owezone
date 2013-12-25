@@ -1,5 +1,11 @@
 Wow::Application.routes.draw do
 
+  resources :people
+
+  resources :event_accesses
+
+  resources :events
+
   devise_for :users
   root 'welcome#index'
   # The priority is based upon order of creation: first created -> highest priority.
