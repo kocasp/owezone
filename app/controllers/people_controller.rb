@@ -5,7 +5,8 @@ class PeopleController < ApplicationController
   # GET /people.json
   def index
     if params.has_key?(:event_id)
-      @people = Event.find(params[:event_id]).people.all
+      @event = Event.find(params[:event_id])
+      @people = @event.people.all
     else
       @people = Person.all
     end
@@ -19,6 +20,9 @@ class PeopleController < ApplicationController
   # GET /people/new
   def new
     @person = Person.new
+    if params.has_key?(:event_id)
+      @person.event_id = params[:event_id]
+    end
   end
 
   # GET /people/1/edit
@@ -32,7 +36,7 @@ class PeopleController < ApplicationController
 
     respond_to do |format|
       if @person.save
-        format.html { redirect_to @person, notice: 'Person was successfully created.' }
+        format.html { redirect_to event_people_path(@person.event_id), notice: 'Person was successfully created.' }
         format.json { render action: 'show', status: :created, location: @person }
       else
         format.html { render action: 'new' }

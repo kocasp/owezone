@@ -4,7 +4,12 @@ class TransactionsController < ApplicationController
   # GET /transactions
   # GET /transactions.json
   def index
-    @transactions = Transaction.all
+    if params.has_key?(:event_id)
+      @event = Event.find(params[:event_id])
+      @transactions = @event.transactions.all
+    else
+      @transactions = Transaction.all
+    end
   end
 
   # GET /transactions/1
@@ -15,10 +20,21 @@ class TransactionsController < ApplicationController
   # GET /transactions/new
   def new
     @transaction = Transaction.new
+    if params.has_key?(:event_id)
+      @transaction.event_id = params[:event_id]
+      @people = Event.find(params[:event_id]).people
+    end
   end
 
   # GET /transactions/1/edit
   def edit
+  end
+
+  def add_details
+
+    @event = Event.find(params[:event_id])
+    redirect_to @event
+    raise Exception
   end
 
   # POST /transactions
@@ -28,7 +44,7 @@ class TransactionsController < ApplicationController
 
     respond_to do |format|
       if @transaction.save
-        format.html { redirect_to @transaction, notice: 'Transaction was successfully created.' }
+        format.html { render action: 'add_details', notice: 'Transaction was successfully created.' }
         format.json { render action: 'show', status: :created, location: @transaction }
       else
         format.html { render action: 'new' }
@@ -69,6 +85,6 @@ class TransactionsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def transaction_params
-      params.require(:transaction).permit(:name)
+      params.require(:transaction).permit(:name, :event_id)
     end
 end
