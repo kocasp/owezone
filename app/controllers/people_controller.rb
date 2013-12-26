@@ -4,7 +4,11 @@ class PeopleController < ApplicationController
   # GET /people
   # GET /people.json
   def index
-    @people = Person.all
+    if params.has_key?(:event_id)
+      @people = Event.find(params[:event_id]).people.all
+    else
+      @people = Person.all
+    end
   end
 
   # GET /people/1
