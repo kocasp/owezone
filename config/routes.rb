@@ -4,7 +4,9 @@ Wow::Application.routes.draw do
 
   resources :event_accesses
 
-  resources :events
+  resources :events do
+    resources :people
+  end
 
   devise_for :users
   root 'welcome#index'
