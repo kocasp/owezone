@@ -1,0 +1,9 @@
+<%= form_tag(save_details_transaction_path(@transaction), method: "post") do %>
+  <% @people.each_with_index do |person, index| %>
+  	<%= check_box_tag 'debt_ids[]', person.id  %> 
+  	<%= person.name %> 
+  	<%= text_field_tag "amounts[#{person.id}]"  %>
+  	<br/>
+  <% end %>
+  <%= submit_tag("Save details") %>
+<% end %>

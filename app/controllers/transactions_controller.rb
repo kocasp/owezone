@@ -1,5 +1,6 @@
 class TransactionsController < ApplicationController
   before_action :set_transaction, only: [:show, :edit, :update, :destroy]
+  include TransactionsHelper
 
   # GET /transactions
   # GET /transactions.json
@@ -31,10 +32,13 @@ class TransactionsController < ApplicationController
   end
 
   def add_details
+    @transaction = Transaction.find(params[:transaction_id])
+    @people = @transaction.event.people
+  end
 
-    @event = Event.find(params[:event_id])
-    redirect_to @event
-    raise Exception
+  def save_details
+    @transaction = Transaction.find(params[:transaction_id])
+    handle_details(@transaction, params["debt_ids"], params["amounts"])
   end
 
   # POST /transactions
@@ -44,7 +48,7 @@ class TransactionsController < ApplicationController
 
     respond_to do |format|
       if @transaction.save
-        format.html { render action: 'add_details', notice: 'Transaction was successfully created.' }
+        format.html { redirect_to add_details_transaction_path(@transaction), notice: 'Transaction was successfully created.' }
         format.json { render action: 'show', status: :created, location: @transaction }
       else
         format.html { render action: 'new' }

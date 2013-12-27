@@ -4,6 +4,8 @@ Wow::Application.routes.draw do
     resources :comments, shallow: true
   end
   get 'transactions/:transaction_id/add_details' => 'transactions#add_details', :as => 'add_details_transaction'
+  post 'transactions/:transaction_id/save_details' => 'transactions#save_details', :as => 'save_details_transaction'
+
 
   resources :transactions do
     resources :spendings
