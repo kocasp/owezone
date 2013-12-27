@@ -1,5 +1,5 @@
 module TransactionsHelper
-	def handle_details(transaction, debt_ids, amounts)
+	def handle_details(transaction_id, debt_ids, amounts)
 		#save spendings
 		@spent = 0
 		@split = 0
@@ -9,14 +9,13 @@ module TransactionsHelper
 			person_id = amount[0].to_i
 			if cash != 0
 				@spent += cash
-				@spendings << Spending.create(:person_id => person_id, :amount => cash)
+				@spendings << Spending.create(:person_id => person_id, :amount => cash, :transaction_id => transaction_id)
 			end
 		end
 		#count debts
 		@split = @spent/debt_ids.count
 		debt_ids.each do |debt|
-			@spendings << Spending.create(:person_id => debt.to_f, :amount => -@split)
+			@spendings << Spending.create(:person_id => debt.to_f, :amount => -@split, :transaction_id => transaction_id)
 		end
-		raise Exception
 	end
 end

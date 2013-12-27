@@ -40,6 +40,7 @@ group :development do
 	gem "better_errors"
   	gem 'meta_request'
   	gem 'binding_of_caller'
+  	gem 'hirb-unicode'
 end
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.1.2'

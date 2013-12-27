@@ -38,7 +38,7 @@ class TransactionsController < ApplicationController
 
   def save_details
     @transaction = Transaction.find(params[:transaction_id])
-    handle_details(@transaction, params["debt_ids"], params["amounts"])
+    handle_details(@transaction.id, params["debt_ids"], params["amounts"])
   end
 
   # POST /transactions

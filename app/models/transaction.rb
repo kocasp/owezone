@@ -1,4 +1,4 @@
 class Transaction < ActiveRecord::Base
 	belongs_to :event
-	has_many :spendings
+	has_many :spendings, dependent: :destroy
 end
