@@ -1,4 +1,15 @@
 Wow::Application.routes.draw do
+  resources :spendings
+  resources :posts do
+    resources :comments, shallow: true
+  end
+  get 'transactions/:transaction_id/add_details' => 'transactions#add_details', :as => 'add_details_transaction'
+  post 'transactions/:transaction_id/save_details' => 'transactions#save_details', :as => 'save_details_transaction'
+
+
+  resources :transactions do
+    resources :spendings
+  end
 
   resources :people
 
@@ -6,6 +17,7 @@ Wow::Application.routes.draw do
 
   resources :events do
     resources :people
+    resources :transactions
   end
 
   devise_for :users

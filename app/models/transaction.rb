@@ -1,4 +1,4 @@
-class Person < ActiveRecord::Base
+class Transaction < ActiveRecord::Base
 	belongs_to :event
 	has_many :spendings
 end

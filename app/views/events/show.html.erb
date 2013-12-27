@@ -7,4 +7,5 @@
 
 <%= link_to 'Edit', edit_event_path(@event) %> |
 <%= link_to 'Back', events_path %> | 
-<%= link_to 'People', events_path %>
+<%= link_to 'People', event_people_path(@event) %> |
+<%= link_to 'New Transaction', new_event_transaction_path(@event) %>
