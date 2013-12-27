@@ -5,5 +5,10 @@
   <%= @transaction.name %>
 </p>
 
-<%= link_to 'Edit', edit_transaction_path(@transaction) %> |
-<%= link_to 'Back', transactions_path %>
+<% @transaction.spendings.each do |spending| %>
+	<p>
+		<%= spending.person.name %> <%= spending.amount %>
+	</p>
+<% end %>
+
+<%= link_to 'Back', event_path(@transaction.event) %>

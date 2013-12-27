@@ -5,6 +5,12 @@
   <%= @event.name %>
 </p>
 
+<% @event.transactions.each do |transaction| %>
+	<p>
+		<%= link_to transaction.name , event_transaction_path(@event,transaction) %>
+	</p>
+<% end %>
+
 <%= link_to 'Edit', edit_event_path(@event) %> |
 <%= link_to 'Back', events_path %> | 
 <%= link_to 'People', event_people_path(@event) %> |
