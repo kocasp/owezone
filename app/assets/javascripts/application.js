@@ -14,6 +14,8 @@
 
 
 //= require turbolinks
-
+//= require jquery-1.10.2
+//= require bootstrap
+//= require_tree .
 
 //$(function(){ $(document).foundation(); });
