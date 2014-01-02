@@ -5,7 +5,7 @@ ruby '2.0.0'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.0.1'
 gem 'devise', '3.2.2'
-gem 'foundation-rails'
+
 # Use postgresql as the database for Active Record
 gem 'pg'
 
@@ -22,7 +22,9 @@ gem 'coffee-rails', '~> 4.0.0'
 # gem 'therubyracer', platforms: :ruby
 
 # Use jquery as the JavaScript library
-gem 'jquery-rails'
+
+
+gem "font-awesome-rails"
 
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
 gem 'turbolinks'
