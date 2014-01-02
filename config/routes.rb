@@ -5,7 +5,7 @@ Wow::Application.routes.draw do
   end
   get 'transactions/:transaction_id/add_details' => 'transactions#add_details', :as => 'add_details_transaction'
   post 'transactions/:transaction_id/save_details' => 'transactions#save_details', :as => 'save_details_transaction'
-
+  get '/tmp_test', to: 'tmp_test#index'
 
   resources :transactions do
     resources :spendings

@@ -1,0 +1,2 @@
+class TmpTestController < ApplicationController
+end
