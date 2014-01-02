@@ -16,6 +16,6 @@
 //= require turbolinks
 //= require jquery-1.10.2
 //= require bootstrap
+//= require raphael-min.js
 //= require_tree .
 
-//$(function(){ $(document).foundation(); });
