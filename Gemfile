@@ -43,6 +43,7 @@ group :development do
   	gem 'meta_request'
   	gem 'binding_of_caller'
   	gem 'hirb-unicode'
+  	gem 'pry'
 end
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.1.2'
