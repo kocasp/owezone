@@ -36,9 +36,24 @@ class TransactionsController < ApplicationController
     @people = @transaction.event.people
   end
 
+  def edit_details
+    @transaction = Transaction.find(params[:transaction_id])
+    @people = @transaction.event.people
+    #raise Exception
+    @old_debt_ids = get_debt_ids
+    @old_amounts = get_amounts
+  end
+
+  def update_details
+    @transaction = Transaction.find(params[:transaction_id])
+    handle_details(@transaction.id, params["debt_ids"], params["amounts"], true)
+    redirect_to @transaction.event, notice: 'Transaction was successfully updated.' 
+  end
+
   def save_details
     @transaction = Transaction.find(params[:transaction_id])
     handle_details(@transaction.id, params["debt_ids"], params["amounts"])
+    redirect_to @transaction.event, notice: 'Transaction was successfully updated.' 
   end
 
   # POST /transactions
@@ -76,7 +91,7 @@ class TransactionsController < ApplicationController
   def destroy
     @transaction.destroy
     respond_to do |format|
-      format.html { redirect_to transactions_url }
+      format.html { redirect_to @transaction.event }
       format.json { head :no_content }
     end
   end
