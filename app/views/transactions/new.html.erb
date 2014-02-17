@@ -1,6 +1,13 @@
+<style type="text/css">
+body {
+	background:url(<%= asset_path 'background2.jpg' %>)  center center;
+}
+.my_icon{
+	 font-size:1500%;
+	 color: #428bca;
+}
+</style>
 <%= render :partial => '/layouts/top_menu' %>
-<h1>New transaction</h1>
+<br/>
 
 <%= render 'form' %>
-
-<%= link_to 'Back', transactions_path %>
