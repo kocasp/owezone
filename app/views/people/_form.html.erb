@@ -1,25 +1,32 @@
-<%= form_for(@person) do |f| %>
+<div class="col-md-4 col-md-offset-4">
+  <%= form_for(@person) do |f| %>
   <% if @person.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@person.errors.count, "error") %> prohibited this person from being saved:</h2>
+  <div id="error_explanation">
+    <h2><%= pluralize(@person.errors.count, "error") %> prohibited this person from being saved:</h2>
 
-      <ul>
+    <ul>
       <% @person.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
+      <li><%= msg %></li>
       <% end %>
-      </ul>
-    </div>
+    </ul>
+  </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :name %><br>
-    <%= f.text_field :name %>
+  <div class="form-group">
+    <%= f.text_field :name, class: "form-control input-lg", placeholder: "Person name" , :autofocus => true  %>
   </div>
   <div class="field">
-    <%= f.label :event_id %><br>
-    <%= f.number_field :event_id %>
+    <%= f.hidden_field :event_id %>
   </div>
-  <div class="actions">
-    <%= f.submit %>
+  <div class="form-group">
+    <div class="row">
+      <div class="col-md-6">
+        <%= f.submit "Add person", class: "btn btn-primary btn-lg btn-block" %>
+      </div>
+      <div class="col-md-6">
+        <a href="<%= event_path(@person.event) %>" class="btn btn-default btn-lg btn-block" role="button">Cancel</a>
+      </div>
+    </div>
   </div>
-<% end %>
+  <% end %>
+</div>

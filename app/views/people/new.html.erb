@@ -1,5 +1,30 @@
-<h1>New person</h1>
+<style type="text/css">
+body {
+	background:url(<%= asset_path 'background2.jpg' %>)  center center;
+}
+.my_icon{
+	 font-size:1500%;
+	 color: #428bca;
+}
+</style>
 
-<%= render 'form' %>
+<%= render :partial => '/layouts/top_menu' %>
 
-<%= link_to 'Back', people_path %>
+
+<br/>
+<div class="row">
+	<div class="col-lg-12 text-center v-center">
+		<p class="my_icon"><i class="fa fa-user"></i></p>
+
+	</div>
+	
+</div>
+<div class="row">
+
+	<div class="col-lg-12 text-center v-center">
+		<%= render 'form' %>
+
+	</div>
+</div>
+
+

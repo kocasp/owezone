@@ -36,7 +36,7 @@ class PeopleController < ApplicationController
 
     respond_to do |format|
       if @person.save
-        format.html { redirect_to event_people_path(@person.event_id), notice: 'Person was successfully created.' }
+        format.html { redirect_to @person.event, notice: 'Person was successfully added.'  }
         format.json { render action: 'show', status: :created, location: @person }
       else
         format.html { render action: 'new' }
