@@ -159,7 +159,13 @@ body {
                         </td>
 
                         <td>
-                          <a data-confirm="Are you sure you want to delete this person? All debts will be split to other people!" data-method="delete" href="/people/<%=p.id%>" rel="nofollow" class="btn btn-danger btn-xs pull-right" role="button"><i class="fa fa-times"></i></a>
+                          <% if p.spendings.count == 0 %>
+                          <a data-confirm="Are you sure you want to delete this person?" data-method="delete" href="/people/<%=p.id%>" rel="nofollow" class="btn btn-danger btn-xs pull-right" role="button"><i class="fa fa-times"></i></a>
+                          <% else %>
+                          <span class="takes_part" data-toggle="tooltip" data-placement="top" title="First add some people">
+                          <a class="btn btn-default btn-xs pull-right" disabled="disabled" role="button">participating</a>
+                        </span>
+                          <% end %>
                         </td>
                       </tr>
                       <% end %>
@@ -219,6 +225,7 @@ body {
 $(document).ready(function() {
     
     $('.people_first').tooltip();
+    $('.takes_part').tooltip();
     $('.no_people').popover('show');
    function jumpingPop() {
       $(".popover.top.in")
