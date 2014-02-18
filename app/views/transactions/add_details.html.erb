@@ -29,7 +29,7 @@ body {
             <div class="row">
                 <div class="col-md-3">
                     <span class="button-checkbox">
-                        <button type="button" class="btn btn-lg btn-block who_use" data-color="primary" data-toggle="tooltip" data-placement="top" title="Check this if person use and should be charged for goods being bought."><%= person.name %> </button>
+                        <button type="button" class="use_button btn btn-lg btn-block who_use" data-color="primary" data-toggle="tooltip" data-placement="top" title="Check this if person use and should be charged for goods being bought."><%= person.name %> </button>
                         <input style="display: none" id="debt_ids_" name="debt_ids[]" type="checkbox" value="<%= person.id %>" />
                     </span>
                 </div>
@@ -54,15 +54,18 @@ body {
 
 </div>
 
-<script type="text/javascript">
-$(document).ready(function() {
-    
-    $('.who_use').tooltip();
-    $('.who_pays').tooltip();
 
-});
+<script type="text/javascript">
+
     function checkCharge(){
-        if ($("button.active").length != 0){
+        var checkedAtLeastOne = false;
+        $('input[type="checkbox"]').each(function() {
+            if ($(this).is(":checked")) {
+                checkedAtLeastOne = true;
+            }
+        });
+
+        if (checkedAtLeastOne){
             $(".submit").removeAttr("disabled")
         }
         else{
@@ -71,7 +74,82 @@ $(document).ready(function() {
     }
 
 
+$(document).ready(function() {
+    
+    $('.who_use').tooltip();
+    $('.who_pays').tooltip();
 
+});
+
+
+
+
+    $(function () {
+    $('.button-checkbox').each(function () {
+
+        // Settings
+        var $widget = $(this),
+            $button = $widget.find('button'),
+            $checkbox = $widget.find('input:checkbox'),
+            color = $button.data('color'),
+            settings = {
+                on: {
+                    icon: 'fa fa-asterisk'
+                },
+                off: {
+                    icon: 'fa fa-circle'
+                }
+            };
+
+        // Event Handlers
+        $button.on('click', function () {
+            $checkbox.prop('checked', !$checkbox.is(':checked'));
+            $checkbox.triggerHandler('change');
+            updateDisplay();
+        });
+        $checkbox.on('change', function () {
+            updateDisplay();
+            checkCharge();
+        });
+
+        // Actions
+        function updateDisplay() {
+            var isChecked = $checkbox.is(':checked');
+
+            // Set the button's state
+            $button.data('state', (isChecked) ? "on" : "off");
+
+            // Set the button's icon
+            $button.find('.state-icon')
+                .removeClass()
+                .addClass('state-icon ' + settings[$button.data('state')].icon);
+
+            // Update the button's color
+            if (isChecked) {
+                $button
+                    .removeClass('btn-default')
+                    .addClass('btn-' + color + ' active');
+            }
+            else {
+                $button
+                    .removeClass('btn-' + color + ' active')
+                    .addClass('btn-default');
+            }
+        }
+
+        // Initialization
+        function init() {
+
+            updateDisplay();
+
+            // Inject the icon if applicable
+            if ($button.find('.state-icon').length == 0) {
+                $button.prepend('<i class="state-icon ' + settings[$button.data('state')].icon + '"></i> ');
+            }
+        }
+        init();
+    });
+});
 </script>
 
 
