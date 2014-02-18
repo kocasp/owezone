@@ -16,9 +16,11 @@ module TransactionsHelper
 			end
 		end
 		#count debts
-		@split = @spent/debt_ids.count
-		debt_ids.each do |debt|
-			@spendings << Spending.create(:person_id => debt.to_f, :amount => -@split, :transaction_id => transaction_id)
+		if debt_ids != nil
+			@split = @spent/debt_ids.count
+			debt_ids.each do |debt|
+				@spendings << Spending.create(:person_id => debt.to_f, :amount => -@split, :transaction_id => transaction_id)
+			end
 		end
 	end
 

@@ -24,6 +24,7 @@
 body {
   background:url(<%= asset_path 'background2.jpg' %>)  center center;
 }
+
 </style>
 <div id='wrapper'>
 
@@ -130,31 +131,44 @@ body {
           <div class="col-lg-4">
             <div class="panel panel-primary">
               <div class="panel-heading">
-                <h3 class="panel-title"><i class="fa fa-clock-o"></i> User statuses</h3>
+                <h3 class="panel-title"><i class="fa fa-clock-o"></i> Debts statistics</h3>
               </div>
               <div class="panel-body">
-                <div class="list-group">
-                  <% @event.people.each do |p| %>
-                  <a href="#" class="list-group-item">
-                    <% if p.balance < 0 %>
-                    <span class="label label-danger pull-right" style="font-size: 15px">
-                      owes <%= number_with_precision(-p.balance, precision: 2)     %>
-                    </span>
-                    <% elsif p.balance > 0 %>
-                    <span class="label label-success pull-right" style="font-size: 15px">
-                      +<%= number_with_precision(p.balance, precision: 2)     %>
-                    </span>
-                    <% else %>
-                    <span class="label label-default pull-right" style="font-size: 15px">
-                      <%= number_with_precision(p.balance, precision: 2)     %>
-                    </span>
-                    <% end %>
-                    <i class="fa fa-user"></i> <%= p.name %>
-                  </a> 
-                  <% end %>
+                <div class="table-responsive">
+                  <table class="table table-bordered table-hover table-striped tablesorter">
+                    <tbody>
+
+                      <% @event.people.each do |p| %>
+                      <tr href="http://www.google.com">
+
+                        <td>
+                          <i class="fa fa-user"></i> <b><%= p.name %></b>
+                        <% if p.balance < 0 %>
+                          <span class="label label-danger pull-right" style="font-size: 15px">
+                            owes <%= number_with_precision(-p.balance, precision: 2)     %>
+                          </span>
+                          <% elsif p.balance > 0 %>
+                          <span class="label label-success pull-right" style="font-size: 15px">
+                            +<%= number_with_precision(p.balance, precision: 2)     %>
+                          </span>
+                          <% else %>
+                          <span class="label label-default pull-right" style="font-size: 15px">
+                            <%= number_with_precision(p.balance, precision: 2)     %>
+                          </span>
+                        <% end %>
+                        </td>
+
+                        <td>
+                          <a data-confirm="Are you sure you want to delete this person? All debts will be split to other people!" data-method="delete" href="/people/<%=p.id%>" rel="nofollow" class="btn btn-danger btn-xs pull-right" role="button"><i class="fa fa-times"></i></a>
+                        </td>
+                      </tr>
+                      <% end %>
+                      
+                    </tbody>
+                  </table>
                 </div>
                 <div class="text-right">
-                  <a href="<%= new_event_person_path(@event) %>" class="btn btn-default btn-block" role="button">Add Person</a>
+                  <a href="<%= new_event_person_path(@event) %>" class="btn btn-default btn-block <%= "no_people" if @event.people.count == 0  %>" role="button" data-container="body" data-toggle="popover" data-placement="top" data-content="Start with adding some people to your event!">Add Person</a>
                 </div>
               </div>
             </div>
@@ -167,19 +181,11 @@ body {
               <div class="panel-body">
                 <div class="table-responsive">
                   <table class="table table-bordered table-hover table-striped tablesorter">
-                    <thead>
-                      <tr>
-                        <th>Name <i class="fa fa-sort"></i></th>
-                        <th>Date <i class="fa fa-sort"></i></th>
-                        <th>Amount <i class="fa fa-sort"></i></th>
-                        <th><i class="fa"></i></th>
-                      </tr>
-                    </thead>
                     <tbody>
 
                       <% @event.transactions.each do |t| %>
                       <tr href="http://www.google.com">
-                        <td><%= t.name %></td>
+                        <td><b><%= t.name %></b></td>
                         <td><%= t.created_at.to_s(:short) %></td>
                         <td><%= t.spendings.where('amount > 0').sum('amount') %> PLN</td>
                         <td>
@@ -192,8 +198,8 @@ body {
                     </tbody>
                   </table>
                 </div>
-                <div class="text-right">
-                  <a href="<%= new_event_transaction_path(@event) %>" class="btn btn-default btn-block" role="button">Add Transaction</a>
+                <div class="text-right <%= "people_first" if @event.people.count == 0  %>" data-toggle="tooltip" data-placement="top" title="First add some people">
+                  <a href="<%= new_event_transaction_path(@event) %>" class="btn btn-default btn-block <%= "disabled" if @event.people.count == 0  %>" role="button" >Add Transaction</a>
                 </div>
               </div>
             </div>
@@ -208,3 +214,21 @@ body {
 
 
 </div>
+
+<script type="text/javascript">
+$(document).ready(function() {
+    
+    $('.people_first').tooltip();
+    $('.no_people').popover('show');
+   function jumpingPop() {
+      $(".popover.top.in")
+               .animate({"top":"-=20px"},900)
+               .animate({"top":"+=20px"},900,jumpingPop)
+   }
+
+  jumpingPop();
+});
+
+
+
+</script>

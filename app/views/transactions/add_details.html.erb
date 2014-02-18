@@ -29,12 +29,12 @@ body {
             <div class="row">
                 <div class="col-md-3">
                     <span class="button-checkbox">
-                        <button type="button" class="btn btn-lg btn-block" data-color="primary"><%= person.name %> </button>
+                        <button type="button" class="btn btn-lg btn-block who_use" data-color="primary" data-toggle="tooltip" data-placement="top" title="Check this if person use and should be charged for goods being bought."><%= person.name %> </button>
                         <input style="display: none" id="debt_ids_" name="debt_ids[]" type="checkbox" value="<%= person.id %>" />
                     </span>
                 </div>
                 <div class="col-md-9">
-                    <div class="form-group">
+                    <div class="form-group who_pays" data-toggle="tooltip" data-placement="top" title="Type any amount if person pays for goods.">
                         <%= text_field_tag "amounts[#{person.id}]", nil, class: "form-control input-lg", placeholder: "Amount paid" %>
                     </div>
                 </div>
@@ -53,5 +53,18 @@ body {
 
 
 </div>
+
+<script type="text/javascript">
+$(document).ready(function() {
+    
+    $('.who_use').tooltip();
+    $('.who_pays').tooltip();
+
+
+});
+
+
+
+</script>
 
 

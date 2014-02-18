@@ -64,7 +64,7 @@ class PeopleController < ApplicationController
   def destroy
     @person.destroy
     respond_to do |format|
-      format.html { redirect_to people_url }
+      format.html { redirect_to @person.event }
       format.json { head :no_content }
     end
   end

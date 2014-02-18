@@ -8,7 +8,7 @@ body {
 <div class="container">
 <div class="page-header">
   <h1>Welcome!
-  <small>Choose an event from the list or create a new one</small>
+  <small>Choose or create an event (for example mountain trip)</small>
   </h1>
 </div>
   <div class="row">
@@ -18,7 +18,12 @@ body {
                   <% @events.each do |event| %>
                     <a href="<%= event_path(event) %>" class="list-group-item">
                       <h4 class="list-group-item-heading"><%= event.name.capitalize %></h4>
-                      <p class="list-group-item-text">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
+                      <p class="list-group-item-text">
+                        <% event.people.each do |p| %>
+                          <%= p.name %>,
+                        <% end %>
+                        <%= "There are no people in this event" if event.people.count == 0 %>
+                      </p>
                     </a>
                   <% end %>
                 </div>
