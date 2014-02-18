@@ -41,8 +41,17 @@ body {
             </div>
             <br/>
             <% end %>
-            <%= submit_tag("Save details", class: "submit btn btn-primary btn-lg btn-block", disabled: "disabled") %>
+            <div class="row">
+                <div class="col-md-6">
+                            <div id="cant_save" class="define_use" data-toggle="tooltip" data-placement="top" title="First define who should be charged by clicking on names">
+            <input class="submit btn btn-primary btn-lg btn-block" disabled="disabled" name="commit" type="submit" value="Save details">
             <% end %>
+            </div>
+            </div>
+            <div class="col-md-6">
+                <a href="<%= event_path(@transaction.event) %>" class="btn btn-default btn-lg btn-block" role="button">Cancel</a>
+            </div>
+        </div>
         </div>
 
     </div>
@@ -67,9 +76,13 @@ body {
 
         if (checkedAtLeastOne){
             $(".submit").removeAttr("disabled")
+            $("#cant_save").addClass("define_use")
+            $('.define_use').tooltip("destroy");
         }
         else{
             $(".submit").attr("disabled", "disabled")
+            $('.define_use').tooltip();
+            $("#cant_save").removeClass("define_use")
         }
     }
 
@@ -78,78 +91,13 @@ $(document).ready(function() {
     
     $('.who_use').tooltip();
     $('.who_pays').tooltip();
+    $('.define_use').tooltip();
 
 });
 
 
 
-
-    $(function () {
-    $('.button-checkbox').each(function () {
-
-        // Settings
-        var $widget = $(this),
-            $button = $widget.find('button'),
-            $checkbox = $widget.find('input:checkbox'),
-            color = $button.data('color'),
-            settings = {
-                on: {
-                    icon: 'fa fa-asterisk'
-                },
-                off: {
-                    icon: 'fa fa-circle'
-                }
-            };
-
-        // Event Handlers
-        $button.on('click', function () {
-            $checkbox.prop('checked', !$checkbox.is(':checked'));
-            $checkbox.triggerHandler('change');
-            updateDisplay();
-        });
-        $checkbox.on('change', function () {
-            updateDisplay();
-            checkCharge();
-        });
-
-        // Actions
-        function updateDisplay() {
-            var isChecked = $checkbox.is(':checked');
-
-            // Set the button's state
-            $button.data('state', (isChecked) ? "on" : "off");
-
-            // Set the button's icon
-            $button.find('.state-icon')
-                .removeClass()
-                .addClass('state-icon ' + settings[$button.data('state')].icon);
-
-            // Update the button's color
-            if (isChecked) {
-                $button
-                    .removeClass('btn-default')
-                    .addClass('btn-' + color + ' active');
-            }
-            else {
-                $button
-                    .removeClass('btn-' + color + ' active')
-                    .addClass('btn-default');
-            }
-        }
-
-        // Initialization
-        function init() {
-
-            updateDisplay();
-
-            // Inject the icon if applicable
-            if ($button.find('.state-icon').length == 0) {
-                $button.prepend('<i class="state-icon ' + settings[$button.data('state')].icon + '"></i> ');
-            }
-        }
-        init();
-    });
-});
 </script>
+
 
 
