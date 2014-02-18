@@ -41,7 +41,7 @@ body {
             </div>
             <br/>
             <% end %>
-            <%= submit_tag("Save details", class: "btn btn-primary btn-lg btn-block") %>
+            <%= submit_tag("Save details", class: "submit btn btn-primary btn-lg btn-block", disabled: "disabled") %>
             <% end %>
         </div>
 
@@ -60,8 +60,15 @@ $(document).ready(function() {
     $('.who_use').tooltip();
     $('.who_pays').tooltip();
 
-
 });
+    function checkCharge(){
+        if ($("button.active").length != 0){
+            $(".submit").removeAttr("disabled")
+        }
+        else{
+            $(".submit").attr("disabled", "disabled")
+        }
+    }
 
 
 
