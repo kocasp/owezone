@@ -162,9 +162,7 @@ body {
                           <% if p.spendings.count == 0 %>
                           <a data-confirm="Are you sure you want to delete this person?" data-method="delete" href="/people/<%=p.id%>" rel="nofollow" class="btn btn-danger btn-xs pull-right" role="button"><i class="fa fa-times"></i></a>
                           <% else %>
-                          <span class="takes_part" data-toggle="tooltip" data-placement="top" title="First add some people">
-                          <a class="btn btn-default btn-xs pull-right" disabled="disabled" role="button">participating</a>
-                        </span>
+                          <button type="button" class="btn btn-default btn-xs pull-right takes_part" data-toggle="tooltip" data-placement="right" title="You can't remove a person that takes part in transaction."><i class="fa fa-times"></i></button>
                           <% end %>
                         </td>
                       </tr>
