@@ -40,7 +40,8 @@ h1 {
 	margin: 0 auto;
 	width: 100%;
 	min-height:100%;
-	background:url(<%= asset_path 'background.jpg' %>) no-repeat center center;
+	background-color: #1a4055;
+
 	color:#eee;
 	overflow:hidden;
 }
@@ -53,9 +54,15 @@ h1 {
 .v-center {
 	margin-top:7%;
 }
+.sliding_background{
+	position: absolute;
+	background:url(<%= asset_path 'background.jpg' %>) repeat-x;
+	height: 315px;
+	width: 100%;
+}
 
 </style>
-
+<div class="sliding_background">&nbsp</div>
 <div class="container-full">
 
 	<div class="row">
@@ -63,8 +70,6 @@ h1 {
 		<div class="col-lg-12 text-center v-center">
 
 			<p><%= image_tag "logo.png" %></p>
-			<br>
-			<p><%= image_tag "subtitle.png" %></p>
 
 			<br><br>
 
@@ -137,9 +142,7 @@ h1 {
 
 			<div class="row">
 				<div class="col-lg-12">
-					<br><br>
-					<p class="pull-right"><a href="http://www.bootply.com">Template from Bootply</a> &nbsp; ©Copyright 2013 ACME<sup>TM</sup> Brand.</p>
-					<br><br>
+
 				</div>
 			</div>
 		</div>
@@ -160,7 +163,13 @@ h1 {
 
 		$(document).ready(function() {
 
+		function animateBackground(){
+				$('.sliding_background').animate({
+			  'background-position-x': '+=839',
+			}, 30000, 'linear', animateBackground );
+			}
 
+			animateBackground();
 
 		});
 
