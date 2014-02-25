@@ -60,6 +60,22 @@ h1 {
 	height: 315px;
 	width: 100%;
 }
+.js-video {
+  height: 0;
+  padding-top: 25px;
+  padding-bottom: 67.5%;
+  margin-bottom: 10px;
+  position: relative;
+  overflow: hidden;
+}
+ 
+.js-video.widescreen {
+  padding-bottom: 57.25%;
+}
+ 
+.js-video.vimeo {
+  padding-top: 0;
+}
 
 </style>
 <div class="sliding_background">&nbsp</div>
@@ -74,7 +90,7 @@ h1 {
 			<br><br>
 
 
-			<div class="col-md-4 col-md-offset-4">
+			<div class="col-md-4 col-md-offset-2">
 				<%= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
 				<div class="form-group">
 					<%= f.email_field :email, class: "form-control input-lg", placeholder: "Enter your email address" , :autofocus => true %></div>
@@ -94,7 +110,13 @@ h1 {
 							
 						</div>
 					</div>
+					<div class="col-md-4 text-center ">
+						<div class="js-video widescreen vimeo">
+							<iframe src="http://player.vimeo.com/video/87525194" width="100%" height="100%" frameborder="0" allowfullscreen></iframe>
+						</div>
+					</div>
 				</div>
+
 
 			</div> <!-- /row -->
 
@@ -125,7 +147,7 @@ h1 {
 				<br/>
 
 						<div>When you have some people on the list, you can add transactions. Transaction is a purchase of some goods. You can select who pays for them and who should be charged for them in the statistics.<br/> <strong>For example:</strong><br/>
-						There are 4 people - James, John, Nathan and Sidney. You've bought some common food.James paid 200 and John paid 100. John also is not going to eat it, so he should not be charged for that.<br/>
+						There are 4 people - James, John, Nathan and Sidney. You've bought some common food.James paid 200 and John paid 100. John is not going to eat it, so he should not be charged for that.<br/>
 						In that situation you should check only James, Nathan and Sidney names. Then type "200" next to James and "100" next to John (because they were the ones who paid).
 					</div>
 				</div>
@@ -135,7 +157,7 @@ h1 {
 					<br/>
 				<h2>Make some changes when you want.</h2>
 
-						<div>You can add a participant in every moment. When a person comes up and he want to join your event, you can just add him to the list and check his name in the transactions you already created.
+						<div>You can add a participant in every moment. When a person comes up and he wants to join your event, you can just add him to the list and check his name in the transactions you already created.
 					</div>
 				</div>
 			</div>
