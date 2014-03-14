@@ -1,6 +1,7 @@
 module EventsHelper
 
 	def get_settlements
+		return [] if @event.people.count == 0
 		balances = []
 		settlements = []
 		@event.people.each do |p|
