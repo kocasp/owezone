@@ -22,19 +22,29 @@
 -->
 <style type="text/css">
 body {
-  background:url(<%= asset_path 'background2.jpg' %>)  center center;
+  background-color: #1a4055;
+
+}
+.panel-primary .panel-heading{
+  background-color: #90c0db;
+  border-color: #90c0db;
 }
 
 </style>
-<div id='wrapper'>
+
 
       <%= render :partial => '/layouts/top_menu' %>
 
-      <div id="page-wrapper">
 
+      <div id="page-wrapper">
         <div class="row">
           <div class="col-lg-12">
-            <h1>Overview <small><%= @event.name %></small></h1>
+            <center><%= image_tag "logo_dash.png" %></center>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-12">
+            <h1 style="color:white">Overview <small><%= @event.name %></small></h1>
             <div class="alert alert-success alert-dismissable">
               <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
               Welcome to <b>OweZone.net</b>! Service is currently in <strong>EARLY BETA</strong> and can be vurnelabe, so please do not provide any confidential or important data.
@@ -217,10 +227,10 @@ body {
     <!-- JavaScript -->
 
 
-</div>
+
 
 <script type="text/javascript">
-$(document).ready(function() {
+$(window).load(function(){
     
     $('.people_first').tooltip();
     $('.takes_part').tooltip();
