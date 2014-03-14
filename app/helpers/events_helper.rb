@@ -18,7 +18,7 @@ module EventsHelper
 				balances.sort! {|a,b| a[1] <=> b[1]}
 				step += 1
 			else # debt is bigger than a credit
-				settlements << {:from_id => balances[0][0],:amount => -balances.last[1],:to_id => balances.last[0]}
+				settlements << {:from_id => balances[0][0],:amount => balances.last[1],:to_id => balances.last[0]}
 				balances[0][1] += balances.last[1]
 				balances.last[1] = 0
 				balances.sort! {|a,b| a[1] <=> b[1]}
