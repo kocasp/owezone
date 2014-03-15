@@ -15,6 +15,8 @@
           <% if (defined?(@event.id) && !@event.id.nil?)  %>
           <ul class="nav navbar-nav navbar-left">
             <li><a href="<%= events_path %>"><i class="fa fa-chevron-left"></i> Return to Events List</a></li>
+            <li><%= link_to 'Delete event', @event, method: :delete, data: { confirm: 'Are you sure?' } %></li>
+            <li><%= link_to 'Rename event', edit_event_path(@event) %></li>
           </ul>
           <% end %>
           <ul class="nav navbar-nav navbar-right navbar-user">

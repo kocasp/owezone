@@ -186,6 +186,32 @@ body {
                 </div>
               </div>
             </div>
+            <div class="panel panel-primary">
+              <div class="panel-heading">
+                <h3 class="panel-title"><i class="fa fa-money"></i> Suggested Settlement</h3>
+              </div>
+              <div class="panel-body">
+                <div class="table-responsive">
+                  <table class="table table-bordered table-hover table-striped tablesorter">
+                    <tbody>
+
+                      <% get_settlements.each do |s| %>
+                      <tr href="http://www.google.com">
+                        <td><b><%= "#{Person.find(s[:from_id]).name}" %></b>
+                        gives <b><%= number_with_precision(s[:amount], precision: 2) %></b>
+                        to <b><%= "#{Person.find(s[:to_id]).name}" %></b>
+                        </td>
+                      </tr>
+                      <% end %>
+                      
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+
+
+            
           </div>
           <div class="col-lg-8">
             <div class="panel panel-primary">
@@ -214,31 +240,6 @@ body {
                 </div>
                 <div class="text-right <%= "people_first" if @event.people.count == 0  %>" data-toggle="tooltip" data-placement="top" title="First add some people">
                   <a href="<%= new_event_transaction_path(@event) %>" class="btn btn-default btn-block <%= "disabled" if @event.people.count == 0  %>" role="button" >Add Transaction</a>
-                </div>
-              </div>
-            </div>
-
-
-            <div class="panel panel-primary">
-              <div class="panel-heading">
-                <h3 class="panel-title"><i class="fa fa-money"></i> Suggested Settlement</h3>
-              </div>
-              <div class="panel-body">
-                <div class="table-responsive">
-                  <table class="table table-bordered table-hover table-striped tablesorter">
-                    <tbody>
-
-                      <% get_settlements.each do |s| %>
-                      <tr href="http://www.google.com">
-                        <td><b><%= "#{Person.find(s[:from_id]).name}" %></b>
-                        gives <b><%= number_with_precision(s[:amount], precision: 2) %></b>
-                        to <b><%= "#{Person.find(s[:to_id]).name}" %></b>
-                        </td>
-                      </tr>
-                      <% end %>
-                      
-                    </tbody>
-                  </table>
                 </div>
               </div>
             </div>
