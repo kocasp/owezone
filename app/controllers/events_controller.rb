@@ -11,6 +11,7 @@ class EventsController < ApplicationController
   # GET /events/1
   # GET /events/1.json
   def show
+    redirect_to root_path if !@event.users.include? current_user
   end
 
   # GET /events/new
@@ -63,6 +64,10 @@ class EventsController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  # def validate_user
+  #   raise Exception
+  # end
 
   private
     # Use callbacks to share common setup or constraints between actions.
