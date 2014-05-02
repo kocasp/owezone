@@ -1,4 +1,6 @@
 Wow::Application.routes.draw do
+  resources :feedbacks
+
   resources :spendings
   resources :posts do
     resources :comments, shallow: true

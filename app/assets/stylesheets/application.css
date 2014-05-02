@@ -12,3 +12,10 @@
  *= require font-awesome
  *= require_tree .
  */
+ #feedback_btn{
+ 	background: #ffd200;
+ 	color:black;
+ }
+ .why_btn{
+ 	margin-left: 10px;
+ }
