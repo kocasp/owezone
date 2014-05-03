@@ -19,8 +19,9 @@ body {
 }
 
 #page-wrapper {
-  width: 100%;
+  max-width: 1200px;
   padding: 5px 15px;
+  margin: auto;
 }
 
 /* Nav Messages */
