@@ -8,14 +8,24 @@
  * You're free to add application-wide styles to this file and they'll appear at the top of the
  * compiled file, but it's generally better to create a new file per style scope.
  *
- *= require_self
+ *= require bootstrap
  *= require font-awesome
  *= require_tree .
+ *= require_self
+
+ //pages have page specific css precompiled and added in the view
+ *= stub welcome
  */
- #feedback_btn{
- 	background: #ffd200;
- 	color:black;
- }
- .why_btn{
- 	margin-left: 10px;
- }
+
+#page-wrapper {
+	max-width: 1200px;
+	padding: 5px 15px;
+	margin: auto;
+}
+#feedback_btn{
+	background: #ffd200;
+	color:black;
+}
+.why_btn{
+	margin-left: 10px;
+}

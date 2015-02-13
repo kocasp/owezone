@@ -1,0 +1,19 @@
+%h1 Listing spendings
+%table
+  %thead
+    %tr
+      %th Amount
+      %th Person
+      %th
+      %th
+      %th
+  %tbody
+    - @spendings.each do |spending|
+      %tr
+        %td= spending.amount
+        %td= spending.person_id
+        %td= link_to 'Show', spending
+        %td= link_to 'Edit', edit_spending_path(spending)
+        %td= link_to 'Destroy', spending, method: :delete, data: { confirm: 'Are you sure?' }
+%br/
+= link_to 'New Spending', new_spending_path
