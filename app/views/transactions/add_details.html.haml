@@ -1,0 +1,57 @@
+= stylesheet_link_tag "transactions", :media => "all"
+= render :partial => '/layouts/top_menu'
+%br/
+.row
+  .col-lg-12.text-center.v-center
+    %p.my_icon
+      %i.fa.fa-money
+.row
+  .col-lg-12.v-center
+    .col-md-4.col-md-offset-4
+      = form_tag(save_details_transaction_path(@transaction), method: "post") do
+        - @people.each_with_index do |person, index|
+          .row
+            .col-md-3.person-check
+              %span.button-checkbox
+                %button.use_button.btn.btn-lg.btn-block.who_use{"data-color" => "primary", "data-placement" => "top", "data-toggle" => "tooltip", :title => "Check this if person use and should be charged for goods being bought.", :type => "button"}= person.name
+                %input#debt_ids_{:name => "debt_ids[]", :style => "display: none", :type => "checkbox", :value => person.id}/
+            .col-md-9
+              .form-group.who_pays{"data-placement" => "top", "data-toggle" => "tooltip", :title => "Type any amount if person pays for goods."}
+                = text_field_tag "amounts[#{person.id}]", nil, class: "form-control input-lg", placeholder: "Amount paid"
+          %br/
+        .row
+          .col-md-6
+            #cant_save.define_use{"data-placement" => "top", "data-toggle" => "tooltip", :title => "First define who should be charged by clicking on names"}
+              %input.submit.btn.btn-primary.btn-lg.btn-block{:disabled => "disabled", :name => "commit", :type => "submit", :value => "Save details"}/
+          .col-md-6
+            %a.btn.btn-default.btn-lg.btn-block{:href => event_path(@transaction.event), :role => "button"} Cancel
+.container
+:javascript
+  function checkCharge(){
+          var checkedAtLeastOne = false;
+          $('input[type="checkbox"]').each(function() {
+              if ($(this).is(":checked")) {
+                  checkedAtLeastOne = true;
+              }
+          });
+  
+          if (checkedAtLeastOne){
+              $(".submit").removeAttr("disabled")
+              $("#cant_save").addClass("define_use")
+              $('.define_use').tooltip("destroy");
+          }
+          else{
+              $(".submit").attr("disabled", "disabled")
+              $('.define_use').tooltip();
+              $("#cant_save").removeClass("define_use")
+          }
+      }
+  
+  
+  $(document).ready(function() {
+      
+      $('.who_use').tooltip();
+      $('.who_pays').tooltip();
+      $('.define_use').tooltip();
+  
+  });

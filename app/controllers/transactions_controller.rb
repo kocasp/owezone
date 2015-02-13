@@ -27,10 +27,6 @@ class TransactionsController < ApplicationController
     end
   end
 
-  # GET /transactions/1/edit
-  def edit
-  end
-
   def add_details
     @transaction = Transaction.find(params[:transaction_id])
     @people = @transaction.event.people

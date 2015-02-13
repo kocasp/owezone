@@ -1,0 +1,19 @@
+= form_for(@spending) do |f|
+  - if @spending.errors.any?
+    #error_explanation
+      %h2
+        = pluralize(@spending.errors.count, "error")
+        prohibited this spending from being saved:
+      %ul
+        - @spending.errors.full_messages.each do |msg|
+          %li= msg
+  .field
+    = f.label :amount
+    %br/
+    = f.text_field :amount
+  .field
+    = f.label :person_id
+    %br/
+    = f.number_field :person_id
+  .actions
+    = f.submit

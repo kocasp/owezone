@@ -1,0 +1,11 @@
+%p#notice= notice
+%p
+  %strong Name:
+  = @transaction.name
+- @transaction.spendings.each do |spending|
+  %p
+    = spending.person.name
+    = spending.amount
+= link_to 'Back', event_path(@transaction.event)
+= link_to 'Edit', edit_details_transaction_path(@transaction)
+= link_to 'Delete', @transaction, method: :delete, data: { confirm: 'Are you sure?' }

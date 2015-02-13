@@ -1,0 +1,51 @@
+= stylesheet_link_tag "people", :media => "all"
+= render :partial => '/layouts/top_menu'
+%br/
+.col-md-4.col-md-offset-4
+  .panel.panel-primary
+    .panel-heading
+      %h3.panel-title
+        %i.fa.fa-money
+        Spendings details for
+        %b= @person.name
+    .panel-body
+      .table-responsive
+        %table.table.table-bordered.table-hover.table-striped.tablesorter
+          %tbody
+            - @person.spendings.each do |s|
+              - if s.amount < 0
+                %tr
+                  %td{:style => "background-color:#f2b1b0"}
+                    %i.fa.fa-chevron-down
+                    %b= s.transaction.name
+                    %span.label.label-danger.pull-right{:style => "font-size: 15px"}
+                      charged #{number_with_precision(s.amount, precision: 2)}
+                    %br/
+                    %span{:style => "font-size:10px"}
+                      %b= s.transaction.name
+                      cost of
+                      %b= s.transaction.spendings.where('amount > 0').sum('amount')
+                      was split into
+                      %b= s.transaction.spendings.where('amount < 0').count
+                      people
+              - else
+                %tr
+                  %td{:style => "background-color:#c3f2b0"}
+                    %i.fa.fa-usd
+                    %b= s.transaction.name
+                    %span.label.label-success.pull-right{:style => "font-size: 15px"}
+                      paid #{number_with_precision(s.amount, precision: 2)}
+      %h1
+        \ 
+        - if @person.balance < 0
+          %span.label.label-danger.pull-right
+            \= #{number_with_precision(@person.balance, precision: 2)}
+        - elsif @person.balance > 0
+          %span.label.label-success.pull-right
+            \= #{number_with_precision(@person.balance, precision: 2)}
+        - else
+          %span.label.label-default.pull-right
+            = number_with_precision(@person.balance, precision: 2)
+      .text-right{"data-placement" => "top"}
+        %a.btn.btn-default.btn-block{:href => event_path(@person.event), :role => "button"}
+          Return to event
