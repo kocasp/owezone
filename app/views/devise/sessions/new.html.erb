@@ -1,83 +1,4 @@
-
-<!--<h2>Sign in</h2>
-
-<%= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
-  <div>
-  <%= f.email_field :email, class: "form-control input-lg", placeholder: "Enter your email address" , :autofocus => true %></div>
-  <div>
-  <%= f.password_field :password, class: "form-control input-lg", placeholder: "Enter your password" %></div>
-  <% if devise_mapping.rememberable? -%>
-    <div><%= f.check_box :remember_me %> <%= f.label :remember_me %></div>
-  <% end -%>
-
-  <div><%= f.submit "Sign in", type: "button", class: "btn btn-primary btn-lg btn-block" %></div>
-<% end %>
-
-<%= render "devise/shared/links" %>
--->
-
-<style type="text/css">
-@import url(http://fonts.googleapis.com/css?family=Antic+Slab);
-
-html,body {
-	height:100%;
-	margin-top: 0px;
-}
-
-h1 {
-	font-family: 'Titillium Web', sans-serif;
-	font-size:80px;
-	color:#ffffff;
-}
-
-.lead {
-	color:#ffffff;
-}
-
-
-/* Custom container */
-.container-full {
-	margin: 0 auto;
-	width: 100%;
-	min-height:100%;
-	background-color: #1a4055;
-
-	color:#eee;
-	overflow:hidden;
-}
-
-.container-full a {
-	color:#efefef;
-	text-decoration:none;
-}
-
-.v-center {
-	margin-top:7%;
-}
-.sliding_background{
-	position: absolute;
-	background:url(<%= asset_path 'background.jpg' %>) repeat-x;
-	height: 315px;
-	width: 100%;
-}
-.js-video {
-  height: 0;
-  padding-top: 25px;
-  padding-bottom: 67.5%;
-  margin-bottom: 10px;
-  position: relative;
-  overflow: hidden;
-}
- 
-.js-video.widescreen {
-  padding-bottom: 57.25%;
-}
- 
-.js-video.vimeo {
-  padding-top: 0;
-}
-
-</style>
+<%= stylesheet_link_tag "welcome", :media => "all" %>
 <div class="sliding_background">&nbsp</div>
 <div class="container-full">
 
@@ -104,7 +25,7 @@ h1 {
 						<% end -%>
 						<% end %>
 						<div class="form-group">
-							<a class="btn btn-success btn-lg btn-block" href="/users/sign_up">Create account<br><small>No confirmation needed</small></a>
+							<a class="btn btn-success btn-lg btn-block" href="/users/sign_up">Create free account<br><small>No confirmation needed</small></a>
 						</div>
 						<div class="form-group">
 							
