@@ -114,8 +114,8 @@
                       = t.spendings.where('amount > 0').sum('amount')
                       PLN
                     %td
-                      - if EventAccess.where(user: current_user, event: @event, access_type: "editor").any?
                       %a.btn.btn-primary.btn-xs{:href => edit_details_transaction_path(t), :role => "button"} Show details
+                      - if EventAccess.where(user: current_user, event: @event, access_type: "editor").any?
                         %a.btn.btn-danger.btn-xs{"data-confirm" => "Are you sure?", "data-method" => "delete", :href => "/transactions/#{t.id}", :rel => "nofollow", :role => "button"}
                           %i.fa.fa-times
           %div{:class => "text-right #{"people_first" if @event.people.count == 0}", "data-placement" => "top", "data-toggle" => "tooltip", :title => "First add some people"}

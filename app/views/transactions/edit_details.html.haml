@@ -22,7 +22,7 @@
           %br/
         .row
           .col-md-6
-            - if EventAccess.where(user: current_user, event: @event, access_type: "editor").any?
+            - if EventAccess.where(user: current_user, event: @transaction.event, access_type: "editor").any?
               = submit_tag('Save details', class: 'submit btn btn-primary btn-lg btn-block')
           .col-md-6
             %a{:href => "#{event_path(@transaction.event)}", :class => "btn btn-default btn-lg btn-block", :role => "button"}
