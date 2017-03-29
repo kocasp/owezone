@@ -15,7 +15,7 @@
   <tbody>
     <% @event_accesses.each do |event_access| %>
       <tr>
-        <td><%= event_access.type %></td>
+        <td><%= event_access.access_type %></td>
         <td><%= event_access.user_id %></td>
         <td><%= event_access.event_id %></td>
         <td><%= link_to 'Show', event_access %></td>
