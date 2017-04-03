@@ -1,10 +1,10 @@
-<%= form_for(@event_access) do |f| %>
-  <% if @event_access.errors.any? %>
+<%= form_for @event_access_form, url: event_event_accesses_path(@event) do |f| %>
+  <% if @event_access_form.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@event_access.errors.count, "error") %> prohibited this event_access from being saved:</h2>
+      <h2><%= pluralize(@event_access_form.errors.count, "error") %> prohibited this event_access from being saved:</h2>
 
       <ul>
-      <% @event_access.errors.full_messages.each do |msg| %>
+      <% @event_access_form.errors.full_messages.each do |msg| %>
         <li><%= msg %></li>
       <% end %>
       </ul>
@@ -16,12 +16,11 @@
     <%= f.text_field :access_type %>
   </div>
   <div class="field">
-    <%= f.label :user_id %><br>
-    <%= f.number_field :user_id %>
+    <%= f.label :user_email %><br>
+    <%= f.text_field :user_email %>
   </div>
   <div class="field">
-    <%= f.label :event_id %><br>
-    <%= f.number_field :event_id %>
+    <%= f.hidden_field :event_id, value: @event.id %>
   </div>
   <div class="actions">
     <%= f.submit %>

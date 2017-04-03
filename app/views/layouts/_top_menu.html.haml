@@ -14,6 +14,7 @@
             Return to Events List
         %li= link_to 'Delete event', @event, method: :delete, data: { confirm: 'Are you sure?' }
         %li= link_to 'Rename event', edit_event_path(@event)
+        %li= link_to 'Edit event access', event_event_accesses_path(@event)
     %ul.nav.navbar-nav.navbar-right.navbar-user
       %li.dropdown.user-dropdown
         %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}

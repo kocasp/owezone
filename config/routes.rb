@@ -17,9 +17,8 @@ Wow::Application.routes.draw do
 
   resources :people
 
-  resources :event_accesses
-
   resources :events do
+    resources :event_accesses
     resources :people
     resources :transactions
   end

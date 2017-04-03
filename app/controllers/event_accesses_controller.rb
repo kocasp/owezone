@@ -1,67 +1,36 @@
 class EventAccessesController < ApplicationController
+  before_action :get_event, only: [:index, :new, :create]
   before_action :set_event_access, only: [:show, :edit, :update, :destroy]
 
-  # GET /event_accesses
-  # GET /event_accesses.json
   def index
-    @event_accesses = EventAccess.all
+    @event_accesses = @event.event_accesses
   end
 
-  # GET /event_accesses/1
-  # GET /event_accesses/1.json
-  def show
-  end
-
-  # GET /event_accesses/new
   def new
-    @event_access = EventAccess.new
+    @event_access_form = EventAccessForm.new
   end
 
-  # GET /event_accesses/1/edit
-  def edit
-  end
-
-  # POST /event_accesses
-  # POST /event_accesses.json
   def create
-    @event_access = EventAccess.new(event_access_params)
-
-    respond_to do |format|
-      if @event_access.save
-        format.html { redirect_to @event_access, notice: 'Event access was successfully created.' }
-        format.json { render action: 'show', status: :created, location: @event_access }
-      else
-        format.html { render action: 'new' }
-        format.json { render json: @event_access.errors, status: :unprocessable_entity }
-      end
+    @event_access_form = EventAccessForm.new(params[:event_access_form])
+    if @event_access_form.valid?
+      @event_access_form.event_access.save!
+      redirect_to event_event_accesses_path, notice: 'Event access was successfully created.'
+    else
+      render :new
     end
   end
 
-  # PATCH/PUT /event_accesses/1
-  # PATCH/PUT /event_accesses/1.json
-  def update
-    respond_to do |format|
-      if @event_access.update(event_access_params)
-        format.html { redirect_to @event_access, notice: 'Event access was successfully updated.' }
-        format.json { head :no_content }
-      else
-        format.html { render action: 'edit' }
-        format.json { render json: @event_access.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
-  # DELETE /event_accesses/1
-  # DELETE /event_accesses/1.json
   def destroy
     @event_access.destroy
-    respond_to do |format|
-      format.html { redirect_to event_accesses_url }
-      format.json { head :no_content }
-    end
+    redirect_to event_accesses_url
   end
 
   private
+
+    def get_event
+      @event = Event.find(params[:event_id])
+    end
+
     # Use callbacks to share common setup or constraints between actions.
     def set_event_access
       @event_access = EventAccess.find(params[:id])
