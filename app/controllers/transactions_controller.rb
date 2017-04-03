@@ -2,8 +2,6 @@ class TransactionsController < ApplicationController
   before_action :set_transaction, only: [:show, :edit, :update, :destroy]
   include TransactionsHelper
 
-  # GET /transactions
-  # GET /transactions.json
   def index
     if params.has_key?(:event_id)
       @event = Event.find(params[:event_id])
@@ -13,12 +11,9 @@ class TransactionsController < ApplicationController
     end
   end
 
-  # GET /transactions/1
-  # GET /transactions/1.json
   def show
   end
 
-  # GET /transactions/new
   def new
     @transaction = Transaction.new
     if params.has_key?(:event_id)
@@ -43,17 +38,15 @@ class TransactionsController < ApplicationController
   def update_details
     @transaction = Transaction.find(params[:transaction_id])
     handle_details(@transaction.id, params["debt_ids"], params["amounts"], true)
-    redirect_to @transaction.event, notice: 'Transaction was successfully updated.' 
+    redirect_to @transaction.event, notice: 'Transaction was successfully updated.'
   end
 
   def save_details
     @transaction = Transaction.find(params[:transaction_id])
     handle_details(@transaction.id, params["debt_ids"], params["amounts"])
-    redirect_to @transaction.event, notice: 'Transaction was successfully updated.' 
+    redirect_to @transaction.event, notice: 'Transaction was successfully updated.'
   end
 
-  # POST /transactions
-  # POST /transactions.json
   def create
     @transaction = Transaction.new(transaction_params)
 
@@ -68,8 +61,6 @@ class TransactionsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /transactions/1
-  # PATCH/PUT /transactions/1.json
   def update
     respond_to do |format|
       if @transaction.update(transaction_params)
@@ -82,8 +73,6 @@ class TransactionsController < ApplicationController
     end
   end
 
-  # DELETE /transactions/1
-  # DELETE /transactions/1.json
   def destroy
     @transaction.destroy
     respond_to do |format|
